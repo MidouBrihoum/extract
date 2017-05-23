@@ -100,6 +100,7 @@ public class GetOperation {
 		return null;
 		}
 	
+	
 	List<Part> getPartFromMessage(Node x){
 		Lpart = new ArrayList<Part>();
 		NodeList part = x.getChildNodes();
