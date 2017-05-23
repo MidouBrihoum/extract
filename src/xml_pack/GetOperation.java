@@ -19,30 +19,38 @@ import java.io.File;
 
 
 public class GetOperation {
-	File fXmlFile;
-	List<Operation> operation;
 	
-	 public List<Operation> getOperation() {
-		return operation;
+//	File fXmlFile;
+	List<Operation> operationList;
+	
+	Element GlobalElement;
+	 public List<Operation> getOperationList() {
+		return operationList;
 	}
 	 
 	List<Part> Lpart ;
 	 
-	GetOperation(File xml){
-		this.fXmlFile=xml;
+	GetOperation(Element e){
+		this.GlobalElement=e;
 		GetOp();
 		
 	}
+	
+	
+	
+	
+	
 	public void GetOp(){
 				
-		operation = new ArrayList<Operation>(); 
+		operationList = new ArrayList<Operation>(); 
 
 		  try {
 
-			Document	IBCdoc = getDocumentFromXmlFileName ("IBC.xml"); // retourne document depuis le nom du fichier XML
+		//	Document	IBCdoc = getDocumentFromXmlFileName ("IBC.xml"); // retourne document depuis le nom du fichier XML
 	
 				
-				NodeList operations = IBCdoc.getElementsByTagName("operation"); // Liste des operations
+		//	GlobalElement = IBCdoc.getDocumentElement(); 
+				NodeList operations = GlobalElement.getElementsByTagName("operation"); // Liste des operations
 
 				
 				
@@ -56,14 +64,13 @@ public class GetOperation {
 						
 						String Opname= OperationElement.getAttribute("name");   //Nom de l'operation
 						
-						List<Part> PartListe_InputMessage = GetIN_OutFromOperation("input",OperationElement,IBCdoc); //retrouver la liste PART input
-						List<Part> PartListe_OutputMessage = GetIN_OutFromOperation("output",OperationElement,IBCdoc);//retrouver la liste PART input
+						List<Part> PartListe_InputMessage = GetIN_OutFromOperation("input",OperationElement,GlobalElement); //retrouver la liste PART input
+						List<Part> PartListe_OutputMessage = GetIN_OutFromOperation("output",OperationElement,GlobalElement);//retrouver la liste PART input
 						List<Part> PartListe_Preconditions = GetPre_PostConditionFromOperation ("Precondition" ,OperationElement);//retrouver la liste des préconditions depuis l'operation
 						List<Part> PartListe_Postconditions = GetPre_PostConditionFromOperation ("Postcondition" ,OperationElement);//retrouver la liste des PostConditions depuis l'operation
 
-						operation.add(new Operation(Opname, PartListe_InputMessage, PartListe_OutputMessage, PartListe_Preconditions, PartListe_Postconditions));
-						
-
+						operationList.add(new Operation(Opname, PartListe_InputMessage, PartListe_OutputMessage, PartListe_Preconditions, PartListe_Postconditions));
+							
 							}}
 			
 		  }catch (Exception e) {
@@ -82,7 +89,7 @@ public class GetOperation {
 	
 	
 	//-----------------------------------------
-	Node getMessageFromName (String x ,Document y){
+	Node getMessageFromName (String x ,Element y){
 		NodeList messages = y.getElementsByTagName("message");
 		
 		for (int temp2 = 0; temp2 < messages.getLength(); temp2++) {
@@ -118,36 +125,14 @@ public class GetOperation {
 		
 	}
 	
-	//---------------------------------------
-	public Document getDocumentFromXmlFileName (String X)
-	{
-	
-		Document doc=null;
-
-		try {
-			 fXmlFile = new File(X);
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
-			
-		} catch(Exception e ){
-			
-		}
-		
-		return doc;
-		
-		
-	}
-	//------------------------------------------------------
-	List<Part> GetIN_OutFromOperation (String x ,Element e, Document d ) {
+	List<Part> GetIN_OutFromOperation (String x ,Element e, Element y  ) {
 		
 		Node Opinput = e.getElementsByTagName(x).item(0);   // input de l'operation
 		
 		Element eElement2 = (Element) Opinput;                            // element input de l'opreation
 		String inputname =  eElement2.getAttribute("message"); // retrouver le nom du message qu'utilise l'input
 														
-		Node inputMessage =getMessageFromName(inputname,d);  // retrouver le node du message depuis son nom
+		Node inputMessage =getMessageFromName(inputname,y);  // retrouver le node du message depuis son nom
 		
 		List<Part> PartListe_Message=getPartFromMessage(inputMessage); // une liste pour retourner les paramétre des mesage ( dans un objet part)
 		return(PartListe_Message);
@@ -190,22 +175,12 @@ List<Part> getPartFromCondition(Node x,String s ){
 	
 }
 	
-/*
+
 //------------------ test print ---------------
-System.out.println("Operation: "+Opname);
-for (int i = 0; i < PartListe_Preconditions.size(); i++) {
-
-	System.out.println("parametre numero "+(i+1)+":");
-
-
-	System.out.println("partname: "+ PartListe_Preconditions.get(i).name);
-	System.out.println("parttype: "+ PartListe_Preconditions.get(i).type);
-	System.out.println("*******");
-}
-System.out.println("---------------------------");	
+	
 //------------------fin  test print -----------------	
 	
-	*/
+
 	
 	
 	
@@ -220,10 +195,7 @@ System.out.println("---------------------------");
 		
 	
   public static void main(String[] args) {
-	  File ibc = new File("IBC.xml");
-	  GetOperation x = new GetOperation(ibc);
-		
-//		x.print();
-	  
-}
+
+
+  }
 }
