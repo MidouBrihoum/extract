@@ -6,12 +6,14 @@ public class OpandKey {
 
 GetOperation Operations;
 GetKeyword Keywords;
+String filename;
 
-
-public OpandKey(GetOperation operations, GetKeyword keywords) {
+public OpandKey(GetOperation operations, GetKeyword keywords,String filename) {
 	super();
-	File ibc = new File("IBC.xml");
+	File ibc = new File(filename);
 	Operations = operations;
 	Keywords = keywords;
 }
+
+void 
 }

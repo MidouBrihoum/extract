@@ -17,8 +17,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 
-//helloo
-//how are you?
+
 public class GetOperation {
 	File fXmlFile;
 	List<Operation> operation;
