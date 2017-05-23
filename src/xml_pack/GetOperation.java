@@ -63,7 +63,7 @@ public class GetOperation {
 						
 						System.out.println("Operation: "+Opname);
 						for (int i = 0; i < PartListe_inputMessage.size(); i++) {
-							System.out.println("param�tre num�ro "+(i+1)+":");
+							System.out.println("parametre num�ro "+(i+1)+":");
 							System.out.println("partname: "+ PartListe_inputMessage.get(i).name);
 							System.out.println("parttype: "+PartListe_inputMessage.get(i).type);
 							System.out.println("*******");
