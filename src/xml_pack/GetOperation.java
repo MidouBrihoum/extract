@@ -18,6 +18,7 @@ import org.w3c.dom.Element;
 import java.io.File;
 
 //helloo
+//how are you?
 public class GetOperation {
 	File fXmlFile;
 	Document doc;
@@ -51,8 +52,8 @@ public class GetOperation {
 						Element eElement = (Element) tempOp;
 						
 						String Opname;
-						Opname= eElement.getAttribute("name");   //Nom de l'opération
-						Node Opinput = eElement.getElementsByTagName("input").item(0);   //liste input de l'opération
+						Opname= eElement.getAttribute("name");   //Nom de l'opï¿½ration
+						Node Opinput = eElement.getElementsByTagName("input").item(0);   //liste input de l'opï¿½ration
 						
 						Element eElement2 = (Element) Opinput;
 						String inputname =  eElement2.getAttribute("message");
@@ -62,7 +63,7 @@ public class GetOperation {
 						
 						System.out.println("Operation: "+Opname);
 						for (int i = 0; i < PartListe_inputMessage.size(); i++) {
-							System.out.println("paramètre numéro "+(i+1)+":");
+							System.out.println("paramï¿½tre numï¿½ro "+(i+1)+":");
 							System.out.println("partname: "+ PartListe_inputMessage.get(i).name);
 							System.out.println("parttype: "+PartListe_inputMessage.get(i).type);
 							System.out.println("*******");
