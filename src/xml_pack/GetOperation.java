@@ -21,17 +21,22 @@ import java.io.File;
 //how are you?
 public class GetOperation {
 	File fXmlFile;
+	List<Operation> operation;
 	
-	 List<Operation> operation;
-	 List<Part> Lpart ;
+	 public List<Operation> getOperation() {
+		return operation;
+	}
+	 
+	List<Part> Lpart ;
 	 
 	GetOperation(File xml){
 		this.fXmlFile=xml;
 		GetOp();
 		
 	}
-	void GetOp(){
-				operation = new ArrayList<Operation>(); 
+	public void GetOp(){
+				
+		operation = new ArrayList<Operation>(); 
 
 		  try {
 
@@ -57,50 +62,19 @@ public class GetOperation {
 						List<Part> PartListe_Preconditions = GetPre_PostConditionFromOperation ("Precondition" ,OperationElement);//retrouver la liste des préconditions depuis l'operation
 						List<Part> PartListe_Postconditions = GetPre_PostConditionFromOperation ("Postcondition" ,OperationElement);//retrouver la liste des PostConditions depuis l'operation
 
+						operation.add(new Operation(Opname, PartListe_InputMessage, PartListe_OutputMessage, PartListe_Preconditions, PartListe_Postconditions));
 						
-						
-						
-						
-						
-						
-						
-						//------------------ test print ---------------
-						System.out.println("Operation: "+Opname);
-						for (int i = 0; i < PartListe_Preconditions.size(); i++) {
 
-							System.out.println("parametre numero "+(i+1)+":");
-
-
-							System.out.println("partname: "+ PartListe_Preconditions.get(i).name);
-							System.out.println("parttype: "+ PartListe_Preconditions.get(i).type);
-							System.out.println("*******");
-						}
-						System.out.println("---------------------------");	
-						//------------------fin  test print -----------------
-						
 							}}
-				
-				
-				
-				
 			
 		  }catch (Exception e) {
 						e.printStackTrace();
-					    }		
+					    }
+				
 				}
 
 	
 	//------------------ les fonctions ------------------------
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -146,7 +120,7 @@ public class GetOperation {
 	}
 	
 	//---------------------------------------
-	Document getDocumentFromXmlFileName (String X)
+	public Document getDocumentFromXmlFileName (String X)
 	{
 	
 		Document doc=null;
@@ -217,10 +191,22 @@ List<Part> getPartFromCondition(Node x,String s ){
 	
 }
 	
+/*
+//------------------ test print ---------------
+System.out.println("Operation: "+Opname);
+for (int i = 0; i < PartListe_Preconditions.size(); i++) {
 
+	System.out.println("parametre numero "+(i+1)+":");
+
+
+	System.out.println("partname: "+ PartListe_Preconditions.get(i).name);
+	System.out.println("parttype: "+ PartListe_Preconditions.get(i).type);
+	System.out.println("*******");
+}
+System.out.println("---------------------------");	
+//------------------fin  test print -----------------	
 	
-	
-	
+	*/
 	
 	
 	

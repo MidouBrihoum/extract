@@ -18,16 +18,20 @@ import org.w3c.dom.Element;
 import java.io.File;
 
 
-public class SelectIbc {
-	File fXmlFile;	
+public class GetKeyword {
+	 File fXmlFile;	
 	 List<String> Keyword;
 	 
-	SelectIbc(File xml){
+	 public List<String> getKeyword() {
+			return Keyword;
+		}
+	 
+	GetKeyword(File xml){
 		this.fXmlFile=xml;
-		saveIbc();
-		
+		getkey();
 	}
-	void saveIbc(){
+	
+	void getkey(){
 		Keyword = new ArrayList<String>(); 
 
 		  try {
@@ -37,13 +41,9 @@ public class SelectIbc {
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(fXmlFile);
 				doc.getDocumentElement().normalize();
-
-	
 				
 				Node Keywords = doc.getElementsByTagName("keywords").item(0);
 
-				
-				
 				for (int temp = 0; temp < Keywords.getChildNodes().getLength(); temp++) {
 					if (Keywords.getNodeType() == Node.ELEMENT_NODE) {
 						Element eElement = (Element) Keywords;
@@ -59,11 +59,6 @@ public class SelectIbc {
 		  }
 
 	
-	
-	
-	
-	
-	
 	void print(){
 
 		  for (int temp = 0; temp < Keyword.size(); temp++) {
@@ -73,12 +68,13 @@ public class SelectIbc {
 		  System.out.println("taille totale de la liste : "+ Keyword.size());
 	}
 		
-	
+	/*
   public static void main(String[] args) {
 	  File ibc = new File("IBC.xml");
-		SelectIbc x = new SelectIbc(ibc);
+		GetKeyword x = new GetKeyword(ibc);
 		
-		x.print();
+		//x.print();
 	  
-}
+}*/
+	
 }
