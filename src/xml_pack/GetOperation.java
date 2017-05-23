@@ -63,11 +63,11 @@ public class GetOperation {
 						
 						System.out.println("Operation: "+Opname);
 						for (int i = 0; i < PartListe_inputMessage.size(); i++) {
-<<<<<<< HEAD
-							System.out.println("parametre num�ro "+(i+1)+":");
-=======
+
 							System.out.println("parametre numero "+(i+1)+":");
->>>>>>> c3c499add6895f2f42c2727fedac7e016ed04eb2
+
+							System.out.println("parametre numero "+(i+1)+":");
+
 							System.out.println("partname: "+ PartListe_inputMessage.get(i).name);
 							System.out.println("parttype: "+PartListe_inputMessage.get(i).type);
 							System.out.println("*******");
